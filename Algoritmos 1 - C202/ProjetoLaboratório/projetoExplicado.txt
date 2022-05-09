@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+ 
+int main() {
+    
+    int processos[100][3]; // [x][0] => numero processo, [x][1] => tempo execucao, [x][2] => prioridade
+    int contadorLinha=-1; // Contador de linhas de dados inseridos na matriz
+    int tempValor[3]; // valores temporarios (Organização em ordem de prioridade)
+    int soma=0; // Variavel auxiliar de soma
+    int somaTotal=0; // Soma Final do tempo de espera
+
+    bool fullNeg; // Variavel para verificação de linha de 3 valores -1
+    
+    float tempoMedio; // Tempo medio de espera
+
+    // Leitura com repetição parada em linha -1
+    while(!fullNeg){
+        fullNeg=true; // Reset variavel de condição
+        contadorLinha++;
+
+        for(int i=0; i<3; i++){
+            cin >> processos[contadorLinha][i];
+            if(processos[contadorLinha][i]!=-1 && fullNeg)
+                fullNeg = false;
+        }
+    }
+    
+    // Organização em ordem de prioridade
+    for(int i=0; i<contadorLinha; i++){
+        for(int f=0; f<contadorLinha; f++){
+            if(processos[i][2] < processos[f][2]){
+                for(int j=0; j<3; j++){
+                    tempValor[j] = processos[i][j];
+                    processos[i][j] = processos[f][j];
+                    processos[f][j] = tempValor[j];
+                }
+            }
+        }
+    }
+
+    // Mostrando na ordem e com tempo de espera '-' = 1ms
+    for(int i=0; i<contadorLinha; i++){
+        cout << "P" << processos[i][0];
+        for(int j=0; j<processos[i][1]; j++){
+            cout << "-";
+        }
+    }
+
+
+    // Tempo medio de espera
+    for(int i=0; i<(contadorLinha-1); i++){
+        soma += processos[i][1];
+        somaTotal += soma;
+    }
+
+    tempoMedio = (float) somaTotal/contadorLinha;
+    cout << "\nTempo medio de espera: " << tempoMedio << " ms" << endl;
+
+    return 0;
+}
