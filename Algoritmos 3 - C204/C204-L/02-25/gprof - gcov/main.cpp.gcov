@@ -1,0 +1,17 @@
+        -:    0:Source:main.cpp
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include <iostream>
+        -:    2:using namespace std;
+        -:    3:
+        1:    4:void function(){
+        1:    5:	for(int i=0; i<9999; i++);
+        1:    6:}
+        -:    7:
+        1:    8:int main(){
+        1:    9:	cout << "A";
+        1:   10:	function();
+        1:   11:	return 0;
+        3:   12:}/*EOF*/
