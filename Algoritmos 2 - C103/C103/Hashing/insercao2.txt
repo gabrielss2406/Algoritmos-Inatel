@@ -1,0 +1,4 @@
+struct{
+k // chave
+status // 0 - vazio, 1 - ocupado
+}
